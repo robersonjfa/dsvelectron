@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <!-- Criando uma página -->
+    <head>
+        <meta charset="utf-8">
+        <title>Página HTML com JavaScript</title>
+        <!-- adicionando script js -->
+        <script>
+            alert("Olá Javascript");
+        </script>
+        <script src="meuscript.js"></script>
+    </head>
+    <body>
+        <h1>Página HTML com JavaScript</h1>
+        <button onclick="OlaJavascript()">Clique
+        </button>
+        <button onclick="MostraVariaveis()">
+            Mostra Variáveis
+        </button>
+        <hr/>
+        <h3>Calculadora Simples</h3>
+        Primeiro número: <input type="number" 
+        name="numero1" id="numero1"
+        placeholder="Digite o primeiro número"
+        />
+        <br/>
+        Segundo número: <input type="number" 
+        name="numero2" id="numero2"
+        placeholder="Digite o segundo número"
+        />
+        <br/>
+        + <input type="radio" name="operacao" id="operacao"
+        value="+"/>
+        - <input type="radio" name="operacao" id="operacao"
+        value="-"/>
+        * <input type="radio" name="operacao" id="operacao"
+        value="*"/>
+        / <input type="radio" name="operacao" id="operacao"
+        value="/"/><br/>
+        <button onclick="Calcular()">Calcular</button>
+    </body>
+</html>
