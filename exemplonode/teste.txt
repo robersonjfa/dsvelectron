@@ -1,0 +1,6 @@
+inicio do arquivo de teste
+1
+2
+3
+4
+fim do arquivo de teste
