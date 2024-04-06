@@ -1,40 +1,32 @@
-const db = require("../config/db");
+import prisma from "../config/client.js";
 
 class CasoController {
   //get all todos.
   async getCasos() {
-    let results = await db.query(`SELECT * FROM caso`).catch(console.log);
-    return results.rows;
+    let results = await prisma.caso.findMany();
+    return results;
   }
 
   //create caso.
   async createCaso(caso) {
-    await db
-      .query("INSERT INTO caso (codpes, latcas, lngcas) VALUES ($1, $2, $3)", [caso.pessoa, caso.latitude, caso.longitude])
-      .catch(console.log);
+    await prisma.caso.create({ data: caso });
     return;
   }
 
   //update caso.
   async updateCaso(casoId) {
-    //get the previous caso.
-    let original_caso = await db
-      .query(`SELECT * FROM caso WHERE id=$1`, [parseInt(casoId)])
-      .catch(console.log);
     let new_checked_value = !original_caso.rows[0].checked;
-
     //update the checked caso
-    await db
-      .query(`UPDATE caso SET codpes=$1, latcas=$2, lngcas=$3 WHERE codcas=$2`, [new_checked_value,parseInt(todoId),])
-      .catch(console.log);
+    prisma.caso.update({ where: { id: casoId }, data: new_checked_value });
+
     return;
   }
 
   //delete a caso.
   async deleteCaso(casoId) {
-    await db.query(`DELETE FROM caso WHERE codcas=$1`, [parseInt(casoId)]).catch(console.log);
+    await prisma.caso.delete({ where: { id: casoId } });
     return;
   }
 }
 
-module.exports = CasoController;
+export default CasoController;

@@ -1,20 +1,16 @@
-const db = require("../config/db");
+import prisma from "../config/client.js";
 
 class UsuarioController {
   async getUsuarios() {
-    let results = 
-    await db.query(`SELECT codusu, logusu FROM usuario`).
-    catch(console.log);
-    return results.rows;
+    let results = await prisma.usuario.findMany();
+    return results;
   }
 
   async validaLogin(login, senha) {
-    let results = 
-    await db.query(`SELECT codusu, logusu FROM usuario
-    where logusu = $1 and senusu = $2`, [ login, senha ]).
-    catch(console.log);
-    return results.rows;
+    let results = await prisma.$queryRaw(`SELECT codusu, logusu FROM usuario
+    where logusu = ${login} and senusu = ${senha}`);
+    return results;
   }
 }
 
-module.exports = UsuarioController;
+export default UsuarioController;
