@@ -5,13 +5,13 @@ const routerCasos = express.Router();
 import CasoController from "../controllers/CasoController.js";
 
 //Get all casos.
-routerCasos.get("/casos", async (req, res) => {
+routerCasos.get("/list", async (req, res) => {
   let casos = await new CasoController().getCasos();
   res.status(200).json(casos);
 });
 
 //Create a caso.
-routerCasos.post("/caso", async (req, res) => {
+routerCasos.post("/create", async (req, res) => {
   let { pessoa, latitude, longitude } = req.body;
   console.log(req.body);
   await new CasoController().createCaso({ pessoa, latitude, longitude }, res);
@@ -19,14 +19,14 @@ routerCasos.post("/caso", async (req, res) => {
 });
 
 //Update a caso.
-routerCasos.put("/casos/:casoId", async (req, res) => {
+routerCasos.put("/update/:casoId", async (req, res) => {
   let { casoId } = req.params;
   await new CasoController().updateCaso(casoId, res);
   let casos = await new Caso().getCasos();
 });
 
 //Delete a todo.
-routerCasos.delete("/casos/:casoId", async (req, res) => {
+routerCasos.delete("/delete/:casoId", async (req, res) => {
   let { casoId } = req.params;
   await new CasoController().deleteCaso(casoId);
   let casos = await new Caso().getCasos();
