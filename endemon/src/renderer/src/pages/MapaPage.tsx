@@ -1,3 +1,4 @@
+import React from 'react'
 import Mapa from '../components/Mapa'
 
 const MapaPage = () => {

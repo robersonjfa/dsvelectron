@@ -1,4 +1,3 @@
-import '../App.css'
 import { useState, useEffect } from 'react'
 import { Table, Tooltip, Button, Space } from 'antd'
 import { PlusCircleOutlined, DeleteRowOutlined } from '@ant-design/icons'
@@ -63,10 +62,10 @@ const CasoPage = () => {
       })
   }
 
-  useEffect(() => {
-    console.log('fetch casos')
-    fetchCasos()
-  }, [])
+  // useEffect(() => {
+  //   console.log('fetch casos')
+  //   fetchCasos()
+  // }, [])
 
   return (
     <div>

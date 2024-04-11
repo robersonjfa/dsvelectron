@@ -1,5 +1,4 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
 
 import { Layout, Menu, Modal } from 'antd'
 import {
@@ -15,12 +14,12 @@ const { SubMenu } = Menu
 
 const { confirm } = Modal
 
-export const ProtectedRoute = ({ children }) => {
+export const ProtectedRoute = () => {
   // const { user } = useAuth()
 
   // if (!user) {
   //   // user is not authenticated
-  //   return <Navigate to="/login" />
+  //   return <Navigate to="/" />
   // }
 
   // sair

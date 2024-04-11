@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 const Mapa = () => {
   // Create a reference to the HTML element we want to put the map on

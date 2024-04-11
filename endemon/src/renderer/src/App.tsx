@@ -1,13 +1,16 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import PrincipalPage from './pages/PrincipalPage'
 import CasoPage from './pages/CasoPage'
 import MapaPage from './pages/MapaPage'
 import PessoaPage from './pages/PessoaPage'
 
-import './App.css'
-import { ProtectedRoute } from './components/ProtectedRoute'
-import { AuthProvider } from './hooks/useAuth'
+// import { ProtectedRoute } from './components/ProtectedRoute'
+import { store } from './app/store'
+import { Provider } from 'react-redux'
+import HomePage from './pages/HomePage'
+import MainLayout from './components/layouts/main-layout'
 
 const App = () => {
   // // rotas do breadcrumb
@@ -42,24 +45,19 @@ const App = () => {
   // }
 
   return (
-    <BrowserRouter>
-      <AuthProvider>
+    <Provider store={store}>
+      <MainLayout>
         <Routes>
-          <Route exact path="/" element={<PrincipalPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute>
-                <Route path="casos" element={<CasoPage />} />
-                <Route path="pessoas" element={<PessoaPage />} />
-                <Route path="mapa" element={<MapaPage />} />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/dashboard">
+            <Route path="casos" element={<CasoPage />} />
+            <Route path="pessoas" element={<PessoaPage />} />
+            <Route path="mapa" element={<MapaPage />} />
+          </Route>
         </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+      </MainLayout>
+    </Provider>
   )
 }
 
