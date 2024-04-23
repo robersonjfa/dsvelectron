@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { axiosClient } from '../service/axios.service'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import ClientInput from '../components/auth/inputs/client-input'
 import ErrorSubmit from '../components/auth/form/error-submit'
@@ -29,7 +29,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [success, setSuccess] = useState<boolean>(false)
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const {
@@ -78,7 +78,7 @@ const LoginPage = () => {
           <div className="flex flex-col space-y-6">
             {errorMessage ? <ErrorSubmit errorMessage={errorMessage} /> : ''}
             <div className="flex flex-col space-y-3">
-              <ClientInput placeholder="Username" reference={usernameRef} {...usernameRest} />
+              <ClientInput placeholder="Usuário" reference={usernameRef} {...usernameRest} />
               {errors.username?.message ? (
                 <FormFieldError errorMessage={errors.username.message} />
               ) : (
@@ -88,7 +88,7 @@ const LoginPage = () => {
             <div className="flex flex-col space-y-1">
               <ClientInput
                 type={'password'}
-                placeholder="Password"
+                placeholder="Senha"
                 reference={passwordRef}
                 {...passwordRest}
               />
@@ -99,6 +99,7 @@ const LoginPage = () => {
               )}
             </div>
             <Button isLoading={isLoading} value="Login!" type="submit" />
+            <Button value="Cancelar!" onClick={ () => navigate("/") }/>
           </div>
         )}
       </form>

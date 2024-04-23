@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Table, Tooltip, Button, Space } from 'antd'
 import { PlusCircleOutlined, DeleteRowOutlined } from '@ant-design/icons'
+import { Outlet } from 'react-router'
 
 const CasoPage = () => {
   const checkInit = () => {
@@ -73,6 +74,7 @@ const CasoPage = () => {
       <Tooltip title="registrar">
         <Button type="primary" shape="circle" icon={<PlusCircleOutlined />} size="large" />
       </Tooltip>
+      
     </div>
   )
 }

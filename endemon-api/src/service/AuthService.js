@@ -19,7 +19,7 @@ class AuthService {
 
     const accessToken = await jwtService.sign(
       { username: foundUser.logusu },
-      "30s"
+      "600s"
     );
     const refreshToken = await jwtService.sign(
       { username: foundUser.logusu },

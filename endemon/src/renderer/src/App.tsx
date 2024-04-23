@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import PrincipalPage from './pages/PrincipalPage'
@@ -50,7 +49,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard">
+          <Route path="/dashboard/*" element={<HomePage />}>
             <Route path="casos" element={<CasoPage />} />
             <Route path="pessoas" element={<PessoaPage />} />
             <Route path="mapa" element={<MapaPage />} />

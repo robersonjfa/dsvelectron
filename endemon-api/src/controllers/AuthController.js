@@ -11,20 +11,20 @@ authController.post(
   "/login",
   body("username")
     .isString()
-    .withMessage("Username must be a string")
+    .withMessage("Usuário precisa ser string")
     .notEmpty()
-    .withMessage("Username cannot be empty"),
+    .withMessage("Usuário não pode estar vazio"),
   body("password")
     .isString()
-    .withMessage("Password must be a string")
+    .withMessage("Senha precisa ser string")
     .notEmpty()
-    .withMessage("Password cannot be empty"),
+    .withMessage("Senha não pode estar vazia"),
   async (req, res) => {
     const { errors } = validationResult(req);
     if (errors.length > 0)
       return res.status(400).json({
         statusCode: 400,
-        message: "Some inputs need your fix.",
+        message: "Algumas entradas precisam de correção.",
         errors: errors,
       });
 
@@ -43,7 +43,7 @@ authController.post(
       console.log(error);
       return res.status(401).json({
         statusCode: 401,
-        message: "Username or password are wrong...",
+        message: "Usuário e/ou senha inválido ...",
       });
     }
   }
@@ -71,14 +71,14 @@ authController.get("/refresh", async (req, res) => {
 
     return res.status(201).json({
       statusCode: 201,
-      message: "Access token created!",
+      message: "Access token criado!",
       accessToken: newAccessToken,
     });
   } catch (error) {
     console.error(error);
     return res
       .status(403)
-      .json({ statusCode: 403, message: "You're forbidden from doing that." });
+      .json({ statusCode: 403, message: "Você está proibido de realizar a operação." });
   }
 });
 
@@ -91,7 +91,7 @@ authController.post("/logout", (_, res) => {
   });
   res
     .status(204)
-    .json({ statusCode: "204", message: "Logged out successfully" });
+    .json({ statusCode: "204", message: "Logout realizado com sucesso!" });
 });
 
 export default authController;

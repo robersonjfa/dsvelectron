@@ -7,27 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model aluno {
-  codalu        BigInt         @id(map: "aluno_pk")
-  nomalu        String         @db.VarChar(50)
-  endalu        String?        @db.VarChar(100)
-  codnac        Int?           @db.SmallInt
-  nacionalidade nacionalidade? @relation(fields: [codnac], references: [codnac], onDelete: NoAction, onUpdate: NoAction, map: "alu_codnac_fk")
-  historico     historico[]
-
-  @@index([nomalu], map: "alu_nomalu_sk")
-}
-
 model armadilha {
   codarm               Int                    @id @default(autoincrement())
   desarm               String?                @db.VarChar(80)
   residencia_armadilha residencia_armadilha[]
-}
-
-model biblioteca {
-  codbib Int     @id(map: "biblioteca_pk")
-  nombib String  @db.VarChar(60)
-  cidbib String? @db.VarChar(80)
 }
 
 model caso {
@@ -37,33 +20,6 @@ model caso {
   lngcas    Decimal?  @db.Decimal(10, 6)
   datcadcas DateTime? @default(now()) @db.Timestamp(6)
   pessoa    pessoa    @relation(fields: [codpes], references: [codpes], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model disciplina {
-  coddis    Int         @id(map: "disciplina_pk")
-  nomdis    String      @db.VarChar(80)
-  chadis    Int         @default(1) @db.SmallInt
-  historico historico[]
-
-  @@index([nomdis], map: "dis_nomdis_sk")
-}
-
-model historico {
-  codalu     BigInt
-  coddis     Int
-  vlrnot     Decimal    @default(0) @db.Decimal(12, 2)
-  aluno      aluno      @relation(fields: [codalu], references: [codalu], onDelete: NoAction, onUpdate: NoAction, map: "his_codalu_fk")
-  disciplina disciplina @relation(fields: [coddis], references: [coddis], onDelete: NoAction, onUpdate: NoAction, map: "his_coddis_fk")
-
-  @@id([codalu, coddis], map: "historico_pk")
-}
-
-model nacionalidade {
-  codnac Int     @id(map: "nacionalidade_pk") @default(autoincrement())
-  desnac String? @db.VarChar(50)
-  aluno  aluno[]
-
-  @@index([desnac], map: "nac_desnac_sk")
 }
 
 model pessoa {
@@ -108,5 +64,5 @@ model residencia_pessoa {
 model usuario {
   codusu Int    @id @default(autoincrement())
   logusu String @db.VarChar(20)
-  senusu String @db.VarChar(32)
+  senusu String @db.VarChar(100)
 }

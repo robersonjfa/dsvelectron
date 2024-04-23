@@ -15,12 +15,6 @@ const { SubMenu } = Menu
 const { confirm } = Modal
 
 export const ProtectedRoute = () => {
-  // const { user } = useAuth()
-
-  // if (!user) {
-  //   // user is not authenticated
-  //   return <Navigate to="/" />
-  // }
 
   // sair
   function showExitConfirm() {
@@ -67,7 +61,7 @@ export const ProtectedRoute = () => {
           <Menu.Item key="7" icon={<InfoCircleOutlined />}>
             Sobre
           </Menu.Item>
-          <Menu.Item key="8" icon={<LogoutOutlined />} onClick={showExitConfirm}>
+          <Menu.Item key="8" icon={<LogoutOutlined />} onClick={showLogoutConfirm}>
             Sair
           </Menu.Item>
         </Menu>

@@ -4,12 +4,16 @@ import { selectUser, setUser, logoutUser } from '../../app/AuthSlice'
 import { jwtDecode } from 'jwt-decode'
 import Cookies from 'js-cookie'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import Button from '../elements/button'
 import { axiosClient } from '../../service/axios.service'
 import useRefreshToken from '../../hooks/use-refresh-token'
+import { useNavigate } from 'react-router-dom'
+import { Layout, Menu, MenuProps, Modal } from 'antd'
+import { InfoCircleOutlined, LogoutOutlined, UserOutlined, HomeOutlined } from '@ant-design/icons'
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const loggedUser = useSelector(selectUser)
   const dispatch = useDispatch()
   const refresh = useRefreshToken()
@@ -31,37 +35,77 @@ const Navbar = () => {
     }
   }, [])
 
-  const notLoggedIn = (
-    <>
-      <Link to="/login">
-        <Button value="Iniciar" className="w-max px-6 text-xl" />
-      </Link>
-    </>
-  )
-
   const logout = async (): Promise<void> => {
     await axiosClient.post('/auth/logout')
+    Cookies.remove('token')
+    dispatch(logoutUser())
+    navigate('/')
   }
 
+  const items: MenuProps['items'] = [
+    {
+      label: 'Home',
+      key: '1',
+      icon: <HomeOutlined />
+    },
+    {
+      label: 'Cadastro',
+      key: '2',
+      icon: <UserOutlined />,
+      children: [
+        {
+          label: 'Residências',
+          key: '21'
+        },
+        {
+          label: 'Armadilhas',
+          key: '22'
+        }
+      ]
+    },
+    {
+      label: 'Monitoramento',
+      key: '3',
+      icon: <UserOutlined />,
+      children: [
+        {
+          label: 'Casos',
+          key: '31',
+          onClick: () => navigate('/dashboard/casos')
+        },
+        {
+          label: 'Mapa',
+          key: '32',
+          onClick: () => navigate('dashboard/mapa')
+        }
+      ]
+    },
+    {
+      label: 'Sobre',
+      key: '4',
+      icon: <InfoCircleOutlined />
+    },
+    {
+      label: 'Sair',
+      key: '5',
+      icon: <LogoutOutlined />,
+      onClick: logout
+    }
+  ]
+
   return (
-    <nav className="w-full bg-blue-600/10 font-bold text-slate-900 text-center p-4">
-      <div className="flex space-y-3 lg:space-y-0 lg:space-x-6 flex-col lg:flex-row items-center justify-center">
-        <Link to="/">
-          <Button value={'Home!'} className="w-max px-6 text-xl" />
-        </Link>
+    <>
+      <nav className="w-full bg-blue-600/10 font-bold text-slate-900 text-center p-4">
         {loggedUser ? (
           <>
-            <Button
-              value={`Logout`}
-              onClick={logout}
-              className="w-max bg-red-400 hover:bg-red-500 px-6 text-xl"
-            />
+            <Menu theme="light" items={items} defaultSelectedKeys={['1']} mode="horizontal" />
           </>
         ) : (
-          notLoggedIn
+          ''
         )}
-      </div>
-    </nav>
+      </nav>
+      
+    </>
   )
 }
 
