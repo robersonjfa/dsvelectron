@@ -8,7 +8,7 @@ const HomePage = () => {
   const loggedUser = useSelector(selectUser)
 
   return (
-    <section className="w-full max-w-[700px] flex flex-col space-y-12 px-3 py-6">
+    <section className="w-full flex flex-col space-y-12 px-3 py-6">
       
       { !loggedUser ?
       (<><img className="center" width="200" height="200" src={logo} />
