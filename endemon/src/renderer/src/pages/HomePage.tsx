@@ -9,7 +9,9 @@ const HomePage = () => {
 
   return (
     <section className="w-full max-w-[700px] flex flex-col space-y-12 px-3 py-6">
-      <img className="center" width="200" height="200" src={logo} />
+      
+      { !loggedUser ?
+      (<><img className="center" width="200" height="200" src={logo} />
       <h1 className="text-2xl md:text-2xl font-bold text-center text-slate-800">
         ENDEMON - SEU APP DE ENDEMIAS
       </h1>
@@ -21,9 +23,11 @@ const HomePage = () => {
         facilitando ações preventivas e de controle. Com a tecnologia do Endemon, a comunidade e as
         autoridades sanitárias unem forças em uma frente comum contra as endemias, promovendo um
         ambiente mais seguro e saudável para todos.
-      </p>
+      </p></>) : (<div></div>)
+}
       {loggedUser ? (
         <>
+          <Outlet/>
           <p className="font-light text-center text-2xl md:text-2xl">
             Bem-vindo{' '}
             <span className="text-pink-800 font-bold">
@@ -39,6 +43,7 @@ const HomePage = () => {
           </div>
         </>
       ) : (
+        
         <div className="flex flex-col items-center justify-center space-y-3">
           <p className="font-bold text-center text-2xl md:text-2xl">
             Somente usuários autorizados podem acessar!
