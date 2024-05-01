@@ -74,7 +74,6 @@ const CasoPage = () => {
       <Tooltip title="registrar">
         <Button type="primary" shape="circle" icon={<PlusCircleOutlined />} size="large" />
       </Tooltip>
-      
     </div>
   )
 }

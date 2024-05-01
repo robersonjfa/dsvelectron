@@ -10,9 +10,7 @@ function MapWithPlaceholder() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={position}>
-        <Popup>
-          Unoesc - São Miguel do Oeste
-        </Popup>
+        <Popup>Unoesc - São Miguel do Oeste</Popup>
       </Marker>
     </MapContainer>
   )
